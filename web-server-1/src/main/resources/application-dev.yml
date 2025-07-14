@@ -1,0 +1,11 @@
+logging:
+  file:
+    path: ./logs
+    name: application-dev.log
+  level:
+    root: INFO
+    org.felixcjy: DEBUG
+    org.springframework: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.transaction.interceptor: DEBUG
+    org.springframework.jdbc.datasource.DataSourceTransactionManager: DEBUG

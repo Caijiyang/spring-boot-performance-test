@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.felixcjy.mapper.SysRolePermissionMapper">
+    <resultMap id="SysRolePermissionDTOResultMap" type="org.felixcjy.domain.dto.SysRolePermissionDTO">
+        <result property="urlPattern" column="url_pattern"/>
+        <result property="roleId" column="role_id"/>
+        <result property="roleSign" column="role_sign"/>
+        <result property="roleName" column="role_name"/>
+        <result property="permissionId" column="permission_id"/>
+        <result property="permissionName" column="permission_name"/>
+    </resultMap>
+
+    <select id="getRolePermissions" resultMap="SysRolePermissionDTOResultMap">
+        SELECT
+            sp.url_pattern, sr.role_id, sr.role_sign, sr.role_name, sp.permission_id, sp.permission_name
+        FROM sys_role_permission srp
+                 LEFT JOIN sys_role sr ON srp.role_id = sr.role_id
+                 LEFT JOIN sys_permission sp ON srp.permission_id = sp.permission_id
+    </select>
+</mapper>

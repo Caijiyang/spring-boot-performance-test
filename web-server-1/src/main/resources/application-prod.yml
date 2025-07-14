@@ -1,0 +1,11 @@
+logging:
+  file:
+    path: ./logs
+    name: application-prod.log
+  level:
+    root: WARN
+    org.felixcjy: WARN
+    org.springframework: WARN
+    org.springframework.web: WARN
+    org.springframework.transaction.interceptor: WARN
+    org.springframework.jdbc.datasource.DataSourceTransactionManager: WARN
