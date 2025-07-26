@@ -27,6 +27,7 @@
     <jwt.version>0.9.1</jwt.version>
     <springdoc-openapi-ui.version>1.8.0</springdoc-openapi-ui.version>
     <springdoc-openapi-common.version>1.8.0</springdoc-openapi-common.version>
+    <knife4j-openapi3-spring-boot-starter.version>4.4.0</knife4j-openapi3-spring-boot-starter.version>
 
     <minio.version>8.5.17</minio.version>
   </properties>
@@ -70,7 +71,7 @@
         <version>${minio.version}</version>
       </dependency>
 
-      <!-- 工具: SpringDoc -->
+      <!-- 工具: SpringDoc 注：knife4j 已经包含此包-->
       <dependency>
         <groupId>org.springdoc</groupId>
         <artifactId>springdoc-openapi-ui</artifactId>
@@ -81,6 +82,13 @@
         <groupId>org.springdoc</groupId>
         <artifactId>springdoc-openapi-common</artifactId>
         <version>${springdoc-openapi-common.version}</version>
+      </dependency>
+
+      <!-- 工具: knife4j 和上面的互斥，推荐用这个，写个配置 knife4j.enable: true -->
+      <dependency>
+          <groupId>com.github.xiaoymin</groupId>
+          <artifactId>knife4j-openapi3-spring-boot-starter</artifactId>
+          <version>${knife4j-openapi3-spring-boot-starter.version}</version>
       </dependency>
 
       <!-- 诊断测试: 阿里巴巴 arthas 插件 -->
