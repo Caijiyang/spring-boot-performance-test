@@ -94,7 +94,8 @@ springdoc:
   api-docs:
     path: /v3/api-docs # 修改 API 文档路径（默认 /v3/api-docs）
   swagger-ui:
-    path: /swagger-ui.html # 修改 Swagger UI 路径
+    doc-expansion: none # 设置默认不展开接口
+    path: /swagger-ui/index.html # 修改 Swagger UI 路径（默认 /swagger-ui/index.html）
 
 mybatis-plus:
   db-type: MYSQL
@@ -118,6 +119,10 @@ security:
     - /login # 默认开放，建议写
     - /logout # 默认开放，建议写
     - /captcha # 验证码
+    - /swagger-ui/**
+    - /v3/**
+    - /doc.html
+    - /webjars/**
     - /actuator/health
     - /system/user/addUser
     - /test/security/public

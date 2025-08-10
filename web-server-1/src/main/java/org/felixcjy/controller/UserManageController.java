@@ -8,8 +8,6 @@ import org.felixcjy.domain.common.WebResult;
 import org.felixcjy.domain.dto.SysUserDTO;
 import org.felixcjy.domain.enums.ErrorType;
 import org.felixcjy.service.SysUserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

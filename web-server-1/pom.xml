@@ -38,6 +38,18 @@
             <optional>true</optional> <!-- 表示依赖不会传递 -->
         </dependency>
 
+
+        <!-- 工具: Spring Doc -->
+        <!-- <dependency> -->
+        <!--     <groupId>org.springdoc</groupId> -->
+        <!--     <artifactId>springdoc-openapi-ui</artifactId> -->
+        <!-- </dependency> -->
+
+        <!-- <dependency> -->
+        <!--     <groupId>org.springdoc</groupId> -->
+        <!--     <artifactId>springdoc-openapi-common</artifactId> -->
+        <!-- </dependency> -->
+
         <!-- 工具: knife4j -->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>

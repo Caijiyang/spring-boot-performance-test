@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.*;
  * @since : 2025/7/11 15:37
  */
 @RestController
-@RequestMapping("/sys/role")
+@RequestMapping("/system/role")
 @RequiredArgsConstructor
 @Tag(name = "系统设置-角色管理")
-public class SysRoleController {
+public class RoleManageController {
     private final SysRoleService sysRoleService;
 
     @GetMapping("/{id}")

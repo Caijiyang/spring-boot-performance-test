@@ -1,5 +1,6 @@
 package org.felixcjy.controller.test;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.felixcjy.infrastructure.service.RedisService;
@@ -21,6 +22,7 @@ public class RedisController {
     private final RedisService redisService;
 
     @PostMapping("/set")
+    @Operation(summary = "设置值")
     public ResponseEntity<String> setValue(@RequestParam String key,
                                            @RequestParam String value) {
         redisService.setValue(key, value);
@@ -28,6 +30,7 @@ public class RedisController {
     }
 
     @GetMapping("/get")
+    @Operation(summary = "获取值")
     public ResponseEntity<?> getValue(@RequestParam String key) {
         String value = redisService.getValue(key);
         if (value == null) {
@@ -38,6 +41,7 @@ public class RedisController {
     }
 
     @DeleteMapping("/delete")
+    @Operation(summary = "删除值")
     public ResponseEntity<String> deleteKey(@RequestParam String key) {
         boolean deleted = redisService.deleteKey(key);
         return deleted ?
@@ -46,6 +50,7 @@ public class RedisController {
     }
 
     @PostMapping("/expire")
+    @Operation(summary = "设置带过期时间的值")
     public ResponseEntity<String> setExpire(@RequestParam String key,
                                             @RequestParam long seconds) {
         boolean success = redisService.setExpire(key, seconds);

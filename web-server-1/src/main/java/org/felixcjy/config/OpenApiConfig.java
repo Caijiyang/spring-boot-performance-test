@@ -3,6 +3,8 @@ package org.felixcjy.config;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
+import org.springdoc.core.GroupedOpenApi;
+import org.springdoc.core.SwaggerUiConfigParameters;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -22,5 +24,29 @@ public class OpenApiConfig {
                         .contact(new Contact().name("蔡济阳(Felix)"))
                         .description("本接口文档由后端团队（我）倾情奉献，使用前请深呼吸三秒，准备迎接秩序与逻辑的盛宴。")
                         .version("1.0"));
+    }
+
+    @Bean
+    public GroupedOpenApi userGroup() {
+        return GroupedOpenApi.builder()
+                .group("1 测试组")
+                .pathsToMatch("/test/**")
+                .build();
+    }
+
+    @Bean
+    public GroupedOpenApi systemGroup() {
+        return GroupedOpenApi.builder()
+                .group("3 系统接口")
+                .pathsToMatch("/system/**") // 这里可以逗号分隔写多个
+                .build();
+    }
+
+    @Bean
+    public GroupedOpenApi defaultGroup() {
+        return GroupedOpenApi.builder()
+                .group("0 全部接口")
+                .pathsToMatch("/**")
+                .build();
     }
 }

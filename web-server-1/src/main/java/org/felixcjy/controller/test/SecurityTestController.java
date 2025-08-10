@@ -1,5 +1,6 @@
 package org.felixcjy.controller.test;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,21 +15,25 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "测试-Security 权限测试")
 public class SecurityTestController {
     @GetMapping("/public")
+    @Operation(summary = "公开端点")
     public String publicEndpoint() {
         return "这是一个公开端点，所有人都可以访问";
     }
 
     @GetMapping("/private")
+    @Operation(summary = "受保护端点")
     public String privateEndpoint() {
         return "这是一个受保护端点，你必须登录后才能访问";
     }
 
     @GetMapping("/admin")
+    @Operation(summary = "特定角色可访问-admin")
     public String adminEndpoint() {
         return "只有 ADMIN 角色可以访问";
     }
 
     @GetMapping("/common")
+    @Operation(summary = "特定角色可访问-common")
     public String commonEndpoint() {
         return "COMMON 和 ADMIN 都可以访问";
     }
