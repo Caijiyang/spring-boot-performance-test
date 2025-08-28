@@ -34,5 +34,5 @@ build/
 ### Mac OS ###
 .DS_Store
 
-### Apifox ###
-.idea/.cache/.Apifox_Helper
+### 项目 ###
+logs
