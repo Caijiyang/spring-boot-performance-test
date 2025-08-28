@@ -22,9 +22,9 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.228.132:3306/components-integration?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
-    username: root
-    password: Fxsd1100
+    url: jdbc:mysql://172.16.30.131:3306/mydb?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    username: myuser
+    password: mypassword
     druid:
       poolPreparedStatements: true
       maxOpenPreparedStatements: 20
@@ -72,7 +72,7 @@ spring:
           config:
             multi-statement-allow: true
   redis:
-    host: 192.168.228.132
+    host: 172.16.30.131
     port: 6379
     password: Fxsd1100
     database: 0
@@ -108,10 +108,10 @@ mybatis-plus:
 
 # minio 配置
 minio:
-  endpoint: http://127.0.0.1:9000
+  endpoint: http://172.16.30.131:9000
   bucket-name: felix.bucket
-  access-key: bwYmnbdmL7frkbOsFzpo
-  secret-key: 9hNgNZFDEDF4SzpEzAMoqT3GCSK4fY4vSNgqWlIL
+  access-key: OTrNsrg3uuiW8GoLx7wU
+  secret-key: hQZz5hskCz3U6EVOFRA0Jhh1xEyZl9gwJo9Zuq4Y
 
 # Spring Security 开放访问路径
 security:
