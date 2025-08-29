@@ -22,6 +22,9 @@ RUN yum install -y maven \
 # ============================
 FROM amazoncorretto:8
 
+# 安装 groupadd 和 useradd
+RUN yum install -y shadow-utils
+
 # 创建非 root 用户（安全）
 # Alpine 或 Debian 用这个
 #RUN addgroup --system spring && adduser --system spring --ingroup spring
@@ -31,7 +34,10 @@ RUN groupadd -r spring && useradd -r -g spring spring
 WORKDIR /app
 COPY --from=builder /app/target/web-server-1-*.jar app.jar
 
+# 变更 app.jar 文件所有者为 spring 用户
 RUN chown spring:spring app.jar
+
+# 切换到 spring 用户
 USER spring:spring
 
 EXPOSE 8080
