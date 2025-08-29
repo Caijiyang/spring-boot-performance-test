@@ -1,0 +1,40 @@
+# ============================
+# Build Stage
+# ============================
+FROM amazoncorretto:8 AS builder
+WORKDIR /app
+
+# 复制项目配置和源码
+COPY pom.xml .
+COPY src ./src
+
+# 如果项目有 mvnw，推荐用下面这行（项目自带 Maven Wrapper，更稳定）
+# COPY mvnw .
+# COPY .mvn .mvn
+# RUN chmod +x mvnw && ./mvnw clean package -DskipTests
+
+# 当前没有 mvnw，所以直接用系统 Maven 来构建
+RUN yum install -y maven \
+    && mvn clean package -DskipTests
+
+# ============================
+# Run Stage
+# ============================
+FROM amazoncorretto:8
+
+# 创建非 root 用户（安全）
+RUN addgroup --system spring && adduser --system spring --ingroup spring
+
+WORKDIR /app
+COPY --from=builder /app/target/web-server-1-*.jar app.jar
+
+RUN chown spring:spring app.jar
+USER spring:spring
+
+EXPOSE 8080
+
+# 健康检查（如果没有 actuator，可以注释掉）
+#HEALTHCHECK --interval=30s --timeout=5s --retries=3 CMD curl -f http://localhost:8080/actuator/health || exit 1
+
+# JVM 内存参数（适合 2核4G 的测试机）
+ENTRYPOINT ["java", "-Xms256m", "-Xmx1024m", "-jar", "app.jar"]
