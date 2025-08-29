@@ -5,6 +5,7 @@
         <groupId>org.felixcjy</groupId>
         <artifactId>spring-boot-performance-test</artifactId>
         <version>0.1</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>web-server-1</artifactId>
