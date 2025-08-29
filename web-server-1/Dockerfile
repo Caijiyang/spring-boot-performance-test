@@ -23,7 +23,10 @@ RUN yum install -y maven \
 FROM amazoncorretto:8
 
 # 创建非 root 用户（安全）
-RUN addgroup --system spring && adduser --system spring --ingroup spring
+# Alpine 或 Debian 用这个
+#RUN addgroup --system spring && adduser --system spring --ingroup spring
+# Rocky 用这个
+RUN groupadd -r spring && useradd -r -g spring spring
 
 WORKDIR /app
 COPY --from=builder /app/target/web-server-1-*.jar app.jar
