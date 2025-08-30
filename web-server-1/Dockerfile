@@ -11,6 +11,12 @@ FROM eclipse-temurin:8-jdk
 # Rocky Linux 用下面这个命令（通用且兼容）
 RUN groupadd -r spring && useradd -r -g spring spring
 
+# 设置时区为北京时间（GMT+8）
+RUN dnf install -y tzdata && \
+    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    echo "Asia/Shanghai" > /etc/timezone
+
+
 # 从 hengyunabc/arthas:latest 镜像复制 Arthas
 COPY --from=hengyunabc/arthas:latest /opt/arthas /opt/arthas
 
