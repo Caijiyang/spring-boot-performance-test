@@ -12,9 +12,9 @@ FROM eclipse-temurin:8-jdk
 RUN groupadd -r spring && useradd -r -g spring spring
 
 # 设置时区为北京时间（GMT+8）
-RUN dnf install -y tzdata && \
-    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
-    echo "Asia/Shanghai" > /etc/timezone
+RUN apt-get update && apt-get install -y tzdata && \
+    ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    dpkg-reconfigure --frontend noninteractive tzdata
 
 
 # 从 hengyunabc/arthas:latest 镜像复制 Arthas
