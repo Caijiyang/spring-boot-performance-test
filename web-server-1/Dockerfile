@@ -36,4 +36,4 @@ EXPOSE 8080
 #   CMD wget -qO- http://localhost:8080/actuator/health || exit 1
 
 # JVM 内存参数
-ENTRYPOINT ["java", "-Xms256m", "-Xmx1024m", "-javaagent:/opt/arthas/arthas-boot.jar", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-Xms256m", "-Xmx1024m", "-javaagent:/opt/arthas/arthas-agent.jar", "-jar", "app.jar"]
