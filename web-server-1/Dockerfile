@@ -6,16 +6,15 @@
 FROM eclipse-temurin:8-jdk
 
 # 创建非 root 用户（安全）
-# Alpine 或 Debian 系统可以使用：
-# RUN addgroup --system spring && adduser --system --ingroup spring spring
-# Rocky Linux 用下面这个命令（通用且兼容）
 RUN groupadd -r spring && useradd -r -g spring spring
+
+# 同步容器时间
+RUN apt-get update && apt-get install -y ntpdate && ntpdate time.nist.gov
 
 # 设置时区为北京时间（GMT+8）
 RUN apt-get update && apt-get install -y tzdata && \
     ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     dpkg-reconfigure --frontend noninteractive tzdata
-
 
 # 从 hengyunabc/arthas:latest 镜像复制 Arthas
 COPY --from=hengyunabc/arthas:latest /opt/arthas /opt/arthas
@@ -26,7 +25,6 @@ WORKDIR /app
 # 复制 TeamCity 构建好的 jar 文件
 # 注意：Docker build 的上下文里必须包含 target/web-server-1-*.jar
 COPY target/web-server-1-*.jar app.jar
-# 注释原因：不再使用 builder 阶段，直接使用 TeamCity 已构建 jar
 
 # 变更 app.jar 文件所有者为 spring 用户
 RUN chown spring:spring app.jar
