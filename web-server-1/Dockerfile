@@ -5,16 +5,14 @@
 # 注意：不使用 slim/alpine，避免生产环境缺少依赖问题
 FROM eclipse-temurin:8-jdk
 
+# 设置环境变量 TZ 为 Asia/Shanghai
+ENV TZ=Asia/Shanghai
+
+# 设置时区
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 # 创建非 root 用户（安全）
 RUN groupadd -r spring && useradd -r -g spring spring
-
-# 同步容器时间
-RUN apt-get update && apt-get install -y ntpdate && ntpdate time.nist.gov
-
-# 设置时区为北京时间（GMT+8）
-RUN apt-get update && apt-get install -y tzdata && \
-    ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
-    dpkg-reconfigure --frontend noninteractive tzdata
 
 # 从 hengyunabc/arthas:latest 镜像复制 Arthas
 COPY --from=hengyunabc/arthas:latest /opt/arthas /opt/arthas
