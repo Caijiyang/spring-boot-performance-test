@@ -32,12 +32,12 @@ FROM eclipse-temurin:8-jre
 # Rocky Linux 用下面这个命令（通用且兼容）
 RUN groupadd -r spring && useradd -r -g spring spring
 
-WORKDIR /app
+WORKDIR /web-server-1
 
 # 复制构建好的 jar 文件
 # 这里不复制 Maven 缓存和源码，减小最终镜像体积
 # 注意：确保 TeamCity 构建的 jar 在 target 目录下
-COPY --from=builder /app/target/web-server-1-*.jar app.jar
+COPY --from=builder /web-server-1/target/web-server-1-*.jar app.jar
 
 # 变更 app.jar 文件所有者为 spring 用户
 RUN chown spring:spring app.jar
