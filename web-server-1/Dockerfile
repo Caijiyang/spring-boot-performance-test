@@ -2,6 +2,7 @@
 # Build Stage
 # ============================
 # 使用官方 Maven 镜像，基于 Eclipse Temurin 8，支持 arm64/amd64
+# 由于 TeamCity 已经构建好了 jar，这里不需要再构建
 FROM maven:3.9.6-eclipse-temurin-8 AS builder
 WORKDIR /app
 
@@ -14,8 +15,9 @@ COPY src ./src
 # COPY .mvn .mvn
 # RUN chmod +x mvnw && ./mvnw clean package -DskipTests
 
-# 使用 Maven 构建
-RUN mvn clean package -DskipTests
+# 使用 Maven 构建（已注释，因为 TeamCity 已经构建 jar）
+# RUN mvn clean package -DskipTests
+# 注释原因：TeamCity 已经执行过 mvn package，这里无需重复构建，节省时间和资源
 
 # ============================
 # Run Stage
@@ -34,6 +36,7 @@ WORKDIR /app
 
 # 复制构建好的 jar 文件
 # 这里不复制 Maven 缓存和源码，减小最终镜像体积
+# 注意：确保 TeamCity 构建的 jar 在 target 目录下
 COPY --from=builder /app/target/web-server-1-*.jar app.jar
 
 # 变更 app.jar 文件所有者为 spring 用户
