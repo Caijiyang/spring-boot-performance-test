@@ -18,12 +18,15 @@ COPY --from=hengyunabc/arthas:latest /opt/arthas /opt/arthas
 WORKDIR /app
 
 # 复制 TeamCity 构建好的 jar 文件
-# 注意：Docker build 的上下文里必须包含 target/web-server-1-0.1.jar
+# 注意：Docker build 的上下文里必须包含 target/web-server-1-*.jar
 COPY target/web-server-1-*.jar app.jar
 # 注释原因：不再使用 builder 阶段，直接使用 TeamCity 已构建 jar
 
 # 变更 app.jar 文件所有者为 spring 用户
 RUN chown spring:spring app.jar
+
+# 赋予 spring 用户执行权限（包括 /opt/arthas 和 /app 目录内的文件）
+RUN chmod -R +x /opt/arthas /app
 
 # 切换到 spring 用户
 USER spring:spring
