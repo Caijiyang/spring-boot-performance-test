@@ -222,7 +222,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
-                    <mainClass>com.felixcjy.superclay.primary.SuperClayMainApplication</mainClass>
+                    <mainClass>org.felixcjy.MainApplication</mainClass>
                     <skip>false</skip>
                 </configuration>
                 <executions>
