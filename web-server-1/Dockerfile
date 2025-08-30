@@ -11,8 +11,8 @@ FROM eclipse-temurin:8-jdk
 # Rocky Linux 用下面这个命令（通用且兼容）
 RUN groupadd -r spring && useradd -r -g spring spring
 
-# 从 hengyunabc/arthas:4.0.5-no-jdk 镜像复制 Arthas
-COPY --from=hengyunabc/arthas:4.0.5-no-jdk /opt/arthas /opt/arthas
+# 从 hengyunabc/arthas:latest 镜像复制 Arthas
+COPY --from=hengyunabc/arthas:latest /opt/arthas /opt/arthas
 
 # 设置工作目录为 /app，更符合容器习惯
 WORKDIR /app
